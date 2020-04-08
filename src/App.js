@@ -1,18 +1,39 @@
-import React, {useState, useRef } from "react";
+import React, { useState, useCallback, memo } from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
+const App = () => {
+  console.log("app");
+  const [text, setText] = useState("");
 
-  React.useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (countRef.current === 10) return clearInterval(intervalId);
-      countRef.current = countRef.current + 1;
-      setCount(countRef.current);
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+  return (
+    <>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <Wrap />
+    </>
+  );
+};
 
-  return <div>The count is: {count}</div>;
-}
+const Wrap = () => {
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  // use useCallback ở đây thì wrap sẽ không render nếu  isChecked không  thay đổi
+  const toggleChecked = useCallback(() => {
+    console.log("render wrap ");
+    return setIsChecked(!isChecked);
+  }, [isChecked]);
+
+  return <Checkbox value={isChecked} onClick={toggleChecked} />;
+};
+
+const Checkbox = memo(({ value, onClick }) => {
+  console.log("Checkbox is renderd!");
+  return (
+    <div style={{ cursor: "pointer" }} onClick={onClick}>
+      {value ? "☑" : "□"}
+    </div>
+  );
+});
 export default App;
