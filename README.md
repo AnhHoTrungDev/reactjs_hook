@@ -8,11 +8,11 @@ link: https://viblo.asia/p/tim-hieu-ve-hooks-trong-react-Ljy5VzGG5ra
 # Không dùng useReduce
 
 <p align="center">
-  <img src="./image/not_useReduce.png" width="100%" alt="success example">
+  <img src="./image/not_useReducer.png" width="100%" alt="success example">
 </p>
 
 # Dùng useReduce
 
 <p align="center">
-  <img src="./image/useReduce.png" width="100%" alt="success example">
+  <img src="./image/useReducer.png" width="100%" alt="success example">
 </p>
