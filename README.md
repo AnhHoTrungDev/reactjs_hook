@@ -1,19 +1,11 @@
-### useReducer
+### useRfs
 
--có 2 thành phần state and dispatch => nhận vào 2 tham số _*state hiện tại*_ và _*action*_ cho phép quản lý state theo kiến trúc **_flux_** (như là redux đang dùng )
+**_nên hạn chế dùng (lý do chưa rõ )_**
 
--xử dụng useReducer thay cho useReducer thay cho useState khi ta có state chứa nhiều thành phần phức tạp
+link: https://viblo.asia/p/refs-trong-react-la-gi-va-mot-so-truong-hop-su-dung-refs-RnB5p4y65PG
 
-link: https://viblo.asia/p/tim-hieu-ve-hooks-trong-react-Ljy5VzGG5ra
+- tạo ra cho mình 1 cái object và object này **_không hay đổi_** sau mỗi lần render
 
-# Không dùng useReduce
+-useRef như là 1 cái box có thể hold bất cứ giá trị nào có thể bị thay đổi
 
-<p align="center">
-  <img src="./image/not_useReducer.png" width="100%" alt="success example">
-</p>
-
-# Dùng useReduce
-
-<p align="center">
-  <img src="./image/useReducer.png" width="100%" alt="success example">
-</p>
+-useRef tạo ra một đối tượng javascript đơn giản, sự khác biệt ở đây là **_{curent:...}_** cung cấp cho bạn cùng 1 đối tượng ref trên mỗi lần kết nối
