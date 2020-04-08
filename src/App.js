@@ -27,7 +27,7 @@ const Wrap = () => {
 
   return <Checkbox value={isChecked} onClick={toggleChecked} />;
 };
-
+// nếu 2 props value and  onClick  ko đổi  thì  sẽ  ko render lại
 const Checkbox = memo(({ value, onClick }) => {
   console.log("Checkbox is renderd!");
   return (
