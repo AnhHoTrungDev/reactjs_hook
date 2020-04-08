@@ -18,10 +18,11 @@ const App = () => {
 
 const Wrap = () => {
   const [isChecked, setIsChecked] = React.useState(false);
-
+  console.log("render wrap ");
+  // const [isChecked2, setIsChecked2] = React.useState(false);
   // use useCallback ở đây thì wrap sẽ không render nếu  isChecked không  thay đổi
   const toggleChecked = useCallback(() => {
-    console.log("render wrap ");
+      console.log("render wrap ");
     return setIsChecked(!isChecked);
   }, [isChecked]);
 
