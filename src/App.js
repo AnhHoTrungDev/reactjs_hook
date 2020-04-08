@@ -1,39 +1,56 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useMemo } from "react";
+import ReactDOM from "react-dom";
 
-const App = () => {
-  console.log("app");
-  const [text, setText] = useState("");
+function App() {
+  // State for our counter
+  const [count, setCount] = useState(0);
+  // State to keep track of current word in array we want to show
+  const [wordIndex, setWordIndex] = useState(0);
 
+  // Words we can flip through and view letter count
+  const words = ["hey", "this", "is", "cool"];
+  // const words = ["this", "this", "this", "this"];
+  const word = words[wordIndex];
+
+  // Returns number of letters in a word
+  // We make it slow by including a large and completely unnecessary loop
+  const computeLetterCount = (word) => {
+    console.log("computeLetterCount");
+    let i = 0;
+    while (i < 1000000000) i++;
+    return word.length;
+  };
+
+  // Memoize computeLetterCount so it uses cached return value if input array ...
+  // ... values are the same as last time the function was run.
+  const letterCount = useMemo(() => computeLetterCount(word), [word]);
+
+  // This would result in lag when incrementing the counter because ...
+  // ... we'd have to wait for expensive function when re-rendering.
+  //const letterCount = computeLetterCount(word);
+console.log("hea");
   return (
-    <>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <Wrap />
-    </>
-  );
-};
+    <div style={{ padding: "15px" }}>
+      <h2>Compute number of letters (slow 🐌)</h2>
 
-const Wrap = () => {
-  const [isChecked, setIsChecked] = React.useState(false);
+      <p>
+        "{word}" has {letterCount} letters
+      </p>
 
-  // use useCallback ở đây thì wrap sẽ không render nếu  isChecked không  thay đổi
-  const toggleChecked = useCallback(() => {
-    console.log("render wrap ");
-    return setIsChecked(!isChecked);
-  }, [isChecked]);
-
-  return <Checkbox value={isChecked} onClick={toggleChecked} />;
-};
-
-const Checkbox = memo(({ value, onClick }) => {
-  console.log("Checkbox is renderd!");
-  return (
-    <div style={{ cursor: "pointer" }} onClick={onClick}>
-      {value ? "☑" : "□"}
+      <button
+        onClick={() => {
+          const next = wordIndex + 1 === words.length ? 0 : wordIndex + 1;
+          setWordIndex(next);
+        }}
+      >
+        Next word
+      </button>
+      <br />
+      <br />
+      <h2>Increment a counter (fast ⚡️)</h2>
+      <p>Counter: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
-});
+}
 export default App;
