@@ -1,56 +1,18 @@
-import React, { useReducer, useState } from "react";
+import React, {useState, useRef } from "react";
 
-function reducerTodo(state, action) {
-  switch (action.type) {
-    case "add-todo":
-      console.log("state :", state);
-      console.log("action :", action);
-      console.log("=>");
-      return {
-        todos: [...state.todos, { text: action.text, isCompleted: false }],
-      };
-    case "toggle-todo":
-      return {
-        todos: state.todos.map((todo, index) =>
-          index === action.idx
-            ? { ...todo, isCompleted: !todo.isCompleted }
-            : todo
-        ),
-      };
-    default:
-      return state;
-  }
+function App() {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (countRef.current === 10) return clearInterval(intervalId);
+      countRef.current = countRef.current + 1;
+      setCount(countRef.current);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return <div>The count is: {count}</div>;
 }
-
-const App = () => {
-  //`      #state    #dispatch               #function   #gía trị ban đầu (initialState)`;
-  const [{ todos }, handleTodo] = useReducer(reducerTodo, { todos: [] });
-  const [text, setText] = useState("");
-
-  return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleTodo({ type: "add-todo", text });
-          setText("");
-        }}
-      >
-        <input value={text} onChange={(e) => setText(e.target.value)} />
-      </form>
-
-      {todos.map((todo, index) => (
-        <div
-          key={index}
-          onClick={() => handleTodo({ type: "toggle-todo", idx: index })}
-          style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
-        >
-          {todo.text}
-        </div>
-      ))}
-
-      <pre>{JSON.stringify(todos, null, 2)}</pre>
-    </div>
-  );
-};
 export default App;
