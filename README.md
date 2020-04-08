@@ -1,3 +1,3 @@
 ### npm sart
 
-lear - reactjs - hook
+learn - reactjs - hook
