@@ -23,3 +23,5 @@ link: https://medium.com/@sdolidze/react-hooks-memoization-99a9a91c8853
 -**Được sử dụng để chặn việc render không cần thiết giữa parent và children component**
 
 link :https://headway.io/blog/react-optimize-components-memo-usememo-usecallback/
+
+-test ssh- 
